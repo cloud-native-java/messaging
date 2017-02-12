@@ -1,0 +1,14 @@
+---
+applications:
+- name: activiti-worker
+  instances: 2
+  host: activiti-worker-${random-word}
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
+  path: target/activiti-integration.jar
+  services:
+    - activiti-mysql
+    - activiti-rabbitmq
+  env:
+    DEBUG: "true"
+    SPRING_PROFILES_ACTIVE: worker, cloud
+    SERVER_PORT: 80

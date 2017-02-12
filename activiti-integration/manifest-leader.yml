@@ -1,0 +1,14 @@
+---
+applications:
+- name: activiti-leader
+  instances: 1
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
+  host: activiti-leader-${random-word}
+  path: target/activiti-integration.jar
+  services:
+    - activiti-mysql
+    - activiti-rabbitmq
+  env:
+    DEBUG: "true"
+    SERVER_PORT: 80
+    SPRING_PROFILES_ACTIVE: leader, cloud

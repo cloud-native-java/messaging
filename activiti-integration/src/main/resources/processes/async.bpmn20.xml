@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions id="definitions"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:activiti="http://activiti.org/bpmn"
+             typeLanguage="http://www.w3.org/2001/XMLSchema"
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             targetNamespace="http://www.activiti.org/bpmn2.0">
+
+    <process id="asyncProcess">
+
+        <startEvent id="start"/>
+
+        <sequenceFlow id="f1" sourceRef="start" targetRef="spring-gateway"/>
+
+        <!--1-->
+        <serviceTask id="spring-gateway" activiti:delegateExpression="#{gateway}"/>
+
+        <sequenceFlow id="f2" sourceRef="spring-gateway" targetRef="confirm-movement"/>
+
+        <!--2-->
+        <scriptTask id="confirm-movement" scriptFormat="groovy">
+            <script>
+                println 'Moving on..'
+            </script>
+        </scriptTask>
+
+        <sequenceFlow id="f3" sourceRef="confirm-movement" targetRef="end"/>
+
+        <endEvent id="end"/>
+
+    </process>
+
+</definitions>
