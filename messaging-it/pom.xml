@@ -8,8 +8,8 @@
         <artifactId>messaging</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>messaging/messaging-it</artifactId>
-
+    <artifactId>messaging-it</artifactId>
+    <name>messaging/messaging-it</name>
     <dependencies>
         <dependency>
             <groupId>cnj</groupId>
