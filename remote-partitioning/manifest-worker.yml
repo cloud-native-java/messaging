@@ -1,0 +1,15 @@
+---
+applications:
+- name: partition-worker
+  instances: 4
+  memory: 1GB
+  host: partition-worker-${random-word}
+  path: target/remote-partitioning.jar
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
+  services:
+    - batch-mysql
+    - batch-rmq
+  env:
+    DEBUG: "true"
+    SPRING_PROFILES_ACTIVE: worker, cloud
+    SERVER_PORT: 80
