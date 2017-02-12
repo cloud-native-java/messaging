@@ -9,7 +9,7 @@
     <name>messaging/stream</name>
     <parent>
         <groupId>cnj</groupId>
-        <artifactId>integration</artifactId>
+        <artifactId>messaging</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modules>

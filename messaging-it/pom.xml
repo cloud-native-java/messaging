@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cnj</groupId>
-        <artifactId>integration</artifactId>
+        <artifactId>messaging</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>integration-it</artifactId>
+    <artifactId>messaging/messaging-it</artifactId>
 
     <dependencies>
         <dependency>
