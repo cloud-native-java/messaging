@@ -14,8 +14,6 @@
     </parent>
 
     <modules>
-        <module>activiti-integration</module>
-        <module>messaging-it</module>
         <module>stream</module>
         <module>batch-and-integration</module>
     </modules>
