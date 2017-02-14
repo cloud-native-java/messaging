@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import stream.producer.ProducerChannels;
 
 @SpringBootApplication
-@EnableBinding(ProducerChannels.class) // <1>
+@EnableBinding(ProducerChannels.class)
+// <1>
 public class StreamProducer {
 
 	public static void main(String args[]) {
@@ -38,11 +39,9 @@ class GreetingProducer {
 		String message = "Hello, " + name + "!";
 
 		// <3>
-		this.direct.send(MessageBuilder.withPayload("Direct: " + message)
-				.build());
+		this.direct.send(MessageBuilder.withPayload("Direct: " + message).build());
 
-		this.broadcast.send(MessageBuilder.withPayload("Broadcast: " + message)
-				.build());
+		this.broadcast.send(MessageBuilder.withPayload("Broadcast: " + message).build());
 		return ResponseEntity.ok(message);
 	}
 }

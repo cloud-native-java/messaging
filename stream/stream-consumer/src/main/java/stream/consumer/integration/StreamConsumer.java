@@ -12,7 +12,8 @@ import org.springframework.messaging.SubscribableChannel;
 import stream.consumer.ConsumerChannels;
 
 @SpringBootApplication
-@EnableBinding(ConsumerChannels.class) // <1>
+@EnableBinding(ConsumerChannels.class)
+// <1>
 public class StreamConsumer {
 
 	public static void main(String args[]) {
@@ -20,21 +21,15 @@ public class StreamConsumer {
 	}
 
 	// <2>
-	private IntegrationFlow incomingMessageFlow(
-			SubscribableChannel incoming,
-			String prefix) {
+	private IntegrationFlow incomingMessageFlow(SubscribableChannel incoming, String prefix) {
 
 		Log log = LogFactory.getLog(getClass());
 
-		return IntegrationFlows
-			.from(incoming)
-			.transform(String.class, String::toUpperCase)
-			.handle(String.class,
-					(greeting, headers) -> {
-						log.info("greeting received in IntegrationFlow ("
-								+ prefix + "): " + greeting);
-						return null;
-					}).get();
+		return IntegrationFlows.from(incoming).transform(String.class, String::toUpperCase)
+				.handle(String.class, (greeting, headers) -> {
+					log.info("greeting received in IntegrationFlow (" + prefix + "): " + greeting);
+					return null;
+				}).get();
 	}
 
 	@Bean

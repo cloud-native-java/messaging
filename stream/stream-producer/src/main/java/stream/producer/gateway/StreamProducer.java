@@ -14,6 +14,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import stream.producer.ProducerChannels;
 
+// <3>
+@MessagingGateway
+interface GreetingGateway {
+
+	@Gateway(requestChannel = ProducerChannels.BROADCAST)
+	void broadcastGreet(String msg);
+
+	@Gateway(requestChannel = ProducerChannels.DIRECT)
+	void directGreet(String msg);
+}
+
 @SpringBootApplication
 @EnableBinding(ProducerChannels.class)
 // <1>
@@ -24,17 +35,6 @@ public class StreamProducer {
 	public static void main(String args[]) {
 		SpringApplication.run(StreamProducer.class, args);
 	}
-}
-
-// <3>
-@MessagingGateway
-interface GreetingGateway {
-
-	@Gateway(requestChannel = ProducerChannels.BROADCAST)
-	void broadcastGreet(String msg);
-
-	@Gateway(requestChannel = ProducerChannels.DIRECT)
-	void directGreet(String msg);
 }
 
 @RestController

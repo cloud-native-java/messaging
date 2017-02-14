@@ -12,13 +12,11 @@ import java.io.File;
 
 import static edabatch.Utils.mv;
 
-
 @Configuration
 class InvalidFileFlowConfiguration {
 
 	@Bean
-	IntegrationFlow invalidFileFlow(
-			BatchChannels channels,
+	IntegrationFlow invalidFileFlow(BatchChannels channels,
 			@Value("${error-directory:${HOME}/Desktop/errors}") File errors) {
 		// @formatter:off
 		return IntegrationFlows

@@ -14,9 +14,8 @@ class SimpleEmailValidationService implements EmailValidationService {
 
 	@Override
 	public boolean isEmailValid(String email) {
-		boolean emailIsValid = StringUtils.hasText(email) &&
-				email.length() > 1 &&
-				email.contains("@");
+		boolean emailIsValid = StringUtils.hasText(email) && email.length() > 1
+				&& email.contains("@");
 		log.debug("emailIsValid: " + emailIsValid);
 		return emailIsValid;
 	}

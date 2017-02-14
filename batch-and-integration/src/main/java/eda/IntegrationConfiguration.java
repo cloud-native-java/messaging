@@ -19,8 +19,7 @@ public class IntegrationConfiguration {
 	private final Log log = LogFactory.getLog(getClass());
 
 	@Bean
-	IntegrationFlow etlFlow(
-			@Value("${input-directory:${HOME}/Desktop/in}") File dir) {
+	IntegrationFlow etlFlow(@Value("${input-directory:${HOME}/Desktop/in}") File dir) {
 		// @formatter:off
 		return IntegrationFlows
 				// <1>

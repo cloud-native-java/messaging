@@ -22,8 +22,7 @@ class FinishedFileFlowConfiguration {
 	private Log log = LogFactory.getLog(getClass());
 
 	@Bean
-	IntegrationFlow finishedJobsFlow(
-			BatchChannels channels,
+	IntegrationFlow finishedJobsFlow(BatchChannels channels,
 			@Value("${completed-directory:${HOME}/Desktop/completed}") File finished,
 			JdbcTemplate jdbcTemplate) {
 		// @formatter:off

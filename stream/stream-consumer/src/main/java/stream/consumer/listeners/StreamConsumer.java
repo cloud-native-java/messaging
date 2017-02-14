@@ -34,7 +34,6 @@ class GreetingProcessor {
 	}
 
 	private void onNewGreeting(String prefix, String greeting) {
-		log.info("greeting received in @StreamListener (" + prefix + "): "
-				+ greeting);
+		log.info("greeting received in @StreamListener (" + prefix + "): " + greeting);
 	}
 }

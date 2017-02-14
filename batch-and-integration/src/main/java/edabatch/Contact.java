@@ -2,6 +2,10 @@ package edabatch;
 
 public class Contact {
 
+	private String fullName, email;
+	private boolean validEmail;
+	private long id;
+
 	public Contact(String full_name, String email, long id) {
 		this.fullName = full_name;
 		this.email = email;
@@ -22,15 +26,14 @@ public class Contact {
 		return fullName;
 	}
 
-	@Override
-	public String toString() {
-		return "Contact{" + "fullName='" + fullName + '\'' + ", email='"
-				+ email + '\'' + ", validEmail=" + validEmail + ", id=" + id
-				+ '}';
-	}
-
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+
+	@Override
+	public String toString() {
+		return "Contact{" + "fullName='" + fullName + '\'' + ", email='" + email + '\''
+				+ ", validEmail=" + validEmail + ", id=" + id + '}';
 	}
 
 	public String getEmail() {
@@ -60,8 +63,4 @@ public class Contact {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-	private String fullName, email;
-	private boolean validEmail;
-	private long id;
 }
