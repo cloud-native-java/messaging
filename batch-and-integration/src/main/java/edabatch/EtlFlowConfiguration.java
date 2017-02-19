@@ -34,7 +34,11 @@ class EtlFlowConfiguration {
     (file, headers) -> {
 
      String absolutePath = file.getAbsolutePath();
+<<<<<<< HEAD
  	 	 // <2>
+=======
+
+>>>>>>> 4464b6092954766c0c650bcf3850041697dffbbc
      JobParameters params = new JobParametersBuilder().addString("file",
       absolutePath).toJobParameters();
 
@@ -42,9 +46,13 @@ class EtlFlowConfiguration {
       .setHeader(ORIGINAL_FILE, absolutePath)
       .copyHeadersIfAbsent(headers).build();
     })
+<<<<<<< HEAD
 	 // <3>
    .handle(new JobLaunchingGateway(launcher))
 	 // <4>
+=======
+   .handle(new JobLaunchingGateway(launcher))
+>>>>>>> 4464b6092954766c0c650bcf3850041697dffbbc
    .routeToRecipients(
     spec -> spec.recipient(c.invalid(), this::notFinished).recipient(
      c.completed(), this::finished)).get();
