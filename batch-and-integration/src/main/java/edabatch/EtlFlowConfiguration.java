@@ -22,8 +22,9 @@ class EtlFlowConfiguration {
 
 	// <1>
 	@Bean
-	IntegrationFlow etlFlow(@Value("${input-directory:${HOME}/Desktop/in}") File directory,
-			BatchChannels c, JobLauncher launcher, Job job) {
+	IntegrationFlow etlFlow(
+		@Value("${input-directory:${HOME}/Desktop/in}") File directory,
+		BatchChannels c, JobLauncher launcher, Job job) {
 
 		// @formatter:off
 		return
@@ -57,7 +58,8 @@ class EtlFlowConfiguration {
 
 	private boolean finished(Message<?> msg) {
 		Object payload = msg.getPayload();
-		return JobExecution.class.cast(payload).getExitStatus().equals(ExitStatus.COMPLETED);
+		return JobExecution.class.cast(payload).getExitStatus()
+			.equals(ExitStatus.COMPLETED);
 	}
 
 	private boolean notFinished(Message<?> msg) {

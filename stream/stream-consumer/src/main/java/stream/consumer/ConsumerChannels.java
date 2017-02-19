@@ -6,6 +6,7 @@ import org.springframework.messaging.SubscribableChannel;
 public interface ConsumerChannels {
 
 	String DIRECTED = "directed";
+
 	String BROADCASTS = "broadcasts";
 
 	// <1>

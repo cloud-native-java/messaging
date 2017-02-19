@@ -19,29 +19,22 @@ public class IntegrationConfiguration {
 	private final Log log = LogFactory.getLog(getClass());
 
 	@Bean
-	IntegrationFlow etlFlow(@Value("${input-directory:${HOME}/Desktop/in}") File dir) {
-		// @formatter:off
+	IntegrationFlow etlFlow(
+		@Value("${input-directory:${HOME}/Desktop/in}") File dir) {
+
 		return IntegrationFlows
-				// <1>
-				.from(Files
-								.inboundAdapter(dir)
-								.autoCreateDirectory(true),
-					consumer -> consumer.poller(
-						spec -> spec.fixedRate(1000)))
-				// <2>
-				.handle(File.class, (file, headers) -> {
-					log.info("we noticed a new file, " + file);
-					return file;
-				})
-				// <3>
-				.routeToRecipients(
-					spec -> spec
-						.recipient(csv(),
-								msg -> hasExt(msg.getPayload(), ".csv"))
-						.recipient(txt(),
-								msg -> hasExt(msg.getPayload(), ".txt")))
-				.get();
-		// @formatter:on
+		// <1>
+			.from(Files.inboundAdapter(dir).autoCreateDirectory(true),
+				consumer -> consumer.poller(spec -> spec.fixedRate(1000)))
+			// <2>
+			.handle(File.class, (file, headers) -> {
+				log.info("we noticed a new file, " + file);
+				return file;
+			})
+			// <3>
+			.routeToRecipients(
+				spec -> spec.recipient(csv(), msg -> hasExt(msg.getPayload(), ".csv"))
+					.recipient(txt(), msg -> hasExt(msg.getPayload(), ".txt"))).get();
 	}
 
 	private boolean hasExt(Object f, String ext) {

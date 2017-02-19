@@ -7,6 +7,7 @@ public interface ProducerChannels {
 
 	// <1>
 	String DIRECT = "directGreetings";
+
 	String BROADCAST = "broadcastGreetings";
 
 	@Output(DIRECT)

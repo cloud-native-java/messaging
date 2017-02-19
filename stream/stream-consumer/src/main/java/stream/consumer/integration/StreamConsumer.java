@@ -21,13 +21,19 @@ public class StreamConsumer {
 	}
 
 	// <2>
-	private IntegrationFlow incomingMessageFlow(SubscribableChannel incoming, String prefix) {
+	private IntegrationFlow incomingMessageFlow(SubscribableChannel incoming,
+		String prefix) {
 
 		Log log = LogFactory.getLog(getClass());
 
-		return IntegrationFlows.from(incoming).transform(String.class, String::toUpperCase)
-				.handle(String.class, (greeting, headers) -> {
-					log.info("greeting received in IntegrationFlow (" + prefix + "): " + greeting);
+		return IntegrationFlows
+			.from(incoming)
+			.transform(String.class, String::toUpperCase)
+			.handle(
+				String.class,
+				(greeting, headers) -> {
+					log.info("greeting received in IntegrationFlow (" + prefix + "): "
+						+ greeting);
 					return null;
 				}).get();
 	}

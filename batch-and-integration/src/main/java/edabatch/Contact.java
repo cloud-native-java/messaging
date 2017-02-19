@@ -3,7 +3,9 @@ package edabatch;
 public class Contact {
 
 	private String fullName, email;
+
 	private boolean validEmail;
+
 	private long id;
 
 	public Contact(String full_name, String email, long id) {
@@ -32,8 +34,8 @@ public class Contact {
 
 	@Override
 	public String toString() {
-		return "Contact{" + "fullName='" + fullName + '\'' + ", email='" + email + '\''
-				+ ", validEmail=" + validEmail + ", id=" + id + '}';
+		return "Contact{" + "fullName='" + fullName + '\'' + ", email='" + email
+			+ '\'' + ", validEmail=" + validEmail + ", id=" + id + '}';
 	}
 
 	public String getEmail() {

@@ -41,7 +41,8 @@ class GreetingProducer {
 		// <3>
 		this.direct.send(MessageBuilder.withPayload("Direct: " + message).build());
 
-		this.broadcast.send(MessageBuilder.withPayload("Broadcast: " + message).build());
+		this.broadcast.send(MessageBuilder.withPayload("Broadcast: " + message)
+			.build());
 		return ResponseEntity.ok(message);
 	}
 }

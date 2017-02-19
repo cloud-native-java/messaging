@@ -23,8 +23,8 @@ class FinishedFileFlowConfiguration {
 
 	@Bean
 	IntegrationFlow finishedJobsFlow(BatchChannels channels,
-			@Value("${completed-directory:${HOME}/Desktop/completed}") File finished,
-			JdbcTemplate jdbcTemplate) {
+		@Value("${completed-directory:${HOME}/Desktop/completed}") File finished,
+		JdbcTemplate jdbcTemplate) {
 		// @formatter:off
 		return IntegrationFlows
 				.from(channels.completed())

@@ -8,10 +8,12 @@ import java.io.IOException;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
- * @author <a href="mailto:josh@joshlong.com">Josh
+ * @author <a
+ * href="mailto:josh@joshlong.com">Josh
  * Long</a>
  */
 abstract class Utils {
+
 	public static void mv(File in, File out) {
 		try {
 			Assert.isTrue(out.exists() || out.mkdirs());

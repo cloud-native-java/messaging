@@ -18,12 +18,14 @@ import java.util.Map;
 class MashapeEmailValidationService implements EmailValidationService {
 
 	private final String mashapeKey;
+
 	private final RestTemplate restTemplate;
+
 	private final String uri;
 
 	@Autowired
 	public MashapeEmailValidationService(@Value("${mashape.key}") String key,
-			@Value("${email-validator.uri}") String uri, RestTemplate restTemplate) {
+		@Value("${email-validator.uri}") String uri, RestTemplate restTemplate) {
 		this.mashapeKey = key;
 		this.uri = uri;
 		this.restTemplate = restTemplate;
@@ -31,16 +33,17 @@ class MashapeEmailValidationService implements EmailValidationService {
 
 	public boolean isEmailValid(String email) {
 		UriComponents emailValidatedUri = UriComponentsBuilder.fromHttpUrl(uri)
-				.buildAndExpand(email);
+			.buildAndExpand(email);
 
-		RequestEntity<Void> requestEntity = RequestEntity.get(emailValidatedUri.toUri())
-				.header("X-Mashape-Key", mashapeKey).build();
+		RequestEntity<Void> requestEntity = RequestEntity
+			.get(emailValidatedUri.toUri()).header("X-Mashape-Key", mashapeKey)
+			.build();
 
 		ParameterizedTypeReference<Map<String, Boolean>> ptr = new ParameterizedTypeReference<Map<String, Boolean>>() {
 		};
 
-		ResponseEntity<Map<String, Boolean>> responseEntity = restTemplate.exchange(
-				requestEntity, ptr);
+		ResponseEntity<Map<String, Boolean>> responseEntity = restTemplate
+			.exchange(requestEntity, ptr);
 
 		return responseEntity.getBody().get("isValid");
 	}
