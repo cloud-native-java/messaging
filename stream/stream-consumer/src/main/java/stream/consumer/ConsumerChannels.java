@@ -5,15 +5,15 @@ import org.springframework.messaging.SubscribableChannel;
 
 public interface ConsumerChannels {
 
-	String DIRECTED = "directed";
+ String DIRECTED = "directed";
 
-	String BROADCASTS = "broadcasts";
+ String BROADCASTS = "broadcasts";
 
-	// <1>
-	@Input(DIRECTED)
-	SubscribableChannel directed();
+ // <1>
+ @Input(DIRECTED)
+ SubscribableChannel directed();
 
-	@Input(BROADCASTS)
-	SubscribableChannel broadcasts();
+ @Input(BROADCASTS)
+ SubscribableChannel broadcasts();
 
 }

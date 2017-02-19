@@ -17,32 +17,32 @@ import stream.producer.ProducerChannels;
 // <1>
 public class StreamProducer {
 
-	public static void main(String args[]) {
-		SpringApplication.run(StreamProducer.class, args);
-	}
+ public static void main(String args[]) {
+  SpringApplication.run(StreamProducer.class, args);
+ }
 }
 
 @RestController
 class GreetingProducer {
 
-	private final MessageChannel broadcast, direct;
+ private final MessageChannel broadcast, direct;
 
-	// <2>
-	@Autowired
-	GreetingProducer(ProducerChannels channels) {
-		this.broadcast = channels.broadcastGreetings();
-		this.direct = channels.directGreetings();
-	}
+ // <2>
+ @Autowired
+ GreetingProducer(ProducerChannels channels) {
+  this.broadcast = channels.broadcastGreetings();
+  this.direct = channels.directGreetings();
+ }
 
-	@RequestMapping("/hi/{name}")
-	ResponseEntity<String> hi(@PathVariable String name) {
-		String message = "Hello, " + name + "!";
+ @RequestMapping("/hi/{name}")
+ ResponseEntity<String> hi(@PathVariable String name) {
+  String message = "Hello, " + name + "!";
 
-		// <3>
-		this.direct.send(MessageBuilder.withPayload("Direct: " + message).build());
+  // <3>
+  this.direct.send(MessageBuilder.withPayload("Direct: " + message).build());
 
-		this.broadcast.send(MessageBuilder.withPayload("Broadcast: " + message)
-			.build());
-		return ResponseEntity.ok(message);
-	}
+  this.broadcast.send(MessageBuilder.withPayload("Broadcast: " + message)
+   .build());
+  return ResponseEntity.ok(message);
+ }
 }

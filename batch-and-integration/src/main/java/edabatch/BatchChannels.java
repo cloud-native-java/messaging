@@ -8,14 +8,14 @@ import org.springframework.messaging.MessageChannel;
 @Configuration
 class BatchChannels {
 
-	@Bean
-	MessageChannel invalid() {
-		return MessageChannels.direct().get();
-	}
+ @Bean
+ MessageChannel invalid() {
+  return MessageChannels.direct().get();
+ }
 
-	@Bean
-	MessageChannel completed() {
-		return MessageChannels.direct().get();
-	}
+ @Bean
+ MessageChannel completed() {
+  return MessageChannels.direct().get();
+ }
 
 }

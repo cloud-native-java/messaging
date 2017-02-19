@@ -2,5 +2,5 @@ package edabatch.email;
 
 public interface EmailValidationService {
 
-	boolean isEmailValid(String email);
+ boolean isEmailValid(String email);
 }

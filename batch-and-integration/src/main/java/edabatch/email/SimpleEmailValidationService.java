@@ -10,13 +10,13 @@ import org.springframework.util.StringUtils;
 @Profile("!production")
 class SimpleEmailValidationService implements EmailValidationService {
 
-	private Log log = LogFactory.getLog(getClass());
+ private Log log = LogFactory.getLog(getClass());
 
-	@Override
-	public boolean isEmailValid(String email) {
-		boolean emailIsValid = StringUtils.hasText(email) && email.length() > 1
-			&& email.contains("@");
-		log.debug("emailIsValid: " + emailIsValid);
-		return emailIsValid;
-	}
+ @Override
+ public boolean isEmailValid(String email) {
+  boolean emailIsValid = StringUtils.hasText(email) && email.length() > 1
+   && email.contains("@");
+  log.debug("emailIsValid: " + emailIsValid);
+  return emailIsValid;
+ }
 }

@@ -12,22 +12,22 @@ import org.springframework.stereotype.Component;
 @Component
 class JobExecutionListener {
 
-	private final JdbcTemplate jdbcTemplate;
+ private final JdbcTemplate jdbcTemplate;
 
-	private Log log = LogFactory.getLog(getClass());
+ private Log log = LogFactory.getLog(getClass());
 
-	@Autowired
-	public JobExecutionListener(JdbcTemplate template) {
-		this.jdbcTemplate = template;
-	}
+ @Autowired
+ public JobExecutionListener(JdbcTemplate template) {
+  this.jdbcTemplate = template;
+ }
 
-	@EventListener(JobExecutionEvent.class)
-	public void job(JobExecutionEvent executionEvent) {
-		log.info("jobExecutionEvent: "
-			+ executionEvent.getJobExecution().toString());
-		jdbcTemplate.query("select * from CONTACT", (RowCallbackHandler) rs -> log
-			.info(String.format("id=%s, full_name=%s, email=%s, valid_email=%s",
-				rs.getLong("id"), rs.getString("full_name"), rs.getString("email"),
-				rs.getBoolean("valid_email"))));
-	}
+ @EventListener(JobExecutionEvent.class)
+ public void job(JobExecutionEvent executionEvent) {
+  log.info("jobExecutionEvent: "
+   + executionEvent.getJobExecution().toString());
+  jdbcTemplate.query("select * from CONTACT", (RowCallbackHandler) rs -> log
+   .info(String.format("id=%s, full_name=%s, email=%s, valid_email=%s",
+    rs.getLong("id"), rs.getString("full_name"), rs.getString("email"),
+    rs.getBoolean("valid_email"))));
+ }
 }

@@ -18,11 +18,11 @@ import stream.producer.ProducerChannels;
 @MessagingGateway
 interface GreetingGateway {
 
-	@Gateway(requestChannel = ProducerChannels.BROADCAST)
-	void broadcastGreet(String msg);
+ @Gateway(requestChannel = ProducerChannels.BROADCAST)
+ void broadcastGreet(String msg);
 
-	@Gateway(requestChannel = ProducerChannels.DIRECT)
-	void directGreet(String msg);
+ @Gateway(requestChannel = ProducerChannels.DIRECT)
+ void directGreet(String msg);
 }
 
 @SpringBootApplication
@@ -32,27 +32,27 @@ interface GreetingGateway {
 // <2>
 public class StreamProducer {
 
-	public static void main(String args[]) {
-		SpringApplication.run(StreamProducer.class, args);
-	}
+ public static void main(String args[]) {
+  SpringApplication.run(StreamProducer.class, args);
+ }
 }
 
 @RestController
 class GreetingProducer {
 
-	private final GreetingGateway gateway;
+ private final GreetingGateway gateway;
 
-	// <4>
-	@Autowired
-	GreetingProducer(GreetingGateway gateway) {
-		this.gateway = gateway;
-	}
+ // <4>
+ @Autowired
+ GreetingProducer(GreetingGateway gateway) {
+  this.gateway = gateway;
+ }
 
-	@RequestMapping(method = RequestMethod.GET, value = "/hi/{name}")
-	ResponseEntity<?> hi(@PathVariable String name) {
-		String message = "Hello, " + name + "!";
-		this.gateway.directGreet("Direct: " + message);
-		this.gateway.broadcastGreet("Broadcast: " + message);
-		return ResponseEntity.ok(message);
-	}
+ @RequestMapping(method = RequestMethod.GET, value = "/hi/{name}")
+ ResponseEntity<?> hi(@PathVariable String name) {
+  String message = "Hello, " + name + "!";
+  this.gateway.directGreet("Direct: " + message);
+  this.gateway.broadcastGreet("Broadcast: " + message);
+  return ResponseEntity.ok(message);
+ }
 }

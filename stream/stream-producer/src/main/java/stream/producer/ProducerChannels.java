@@ -5,15 +5,15 @@ import org.springframework.messaging.MessageChannel;
 
 public interface ProducerChannels {
 
-	// <1>
-	String DIRECT = "directGreetings";
+ // <1>
+ String DIRECT = "directGreetings";
 
-	String BROADCAST = "broadcastGreetings";
+ String BROADCAST = "broadcastGreetings";
 
-	@Output(DIRECT)
-	// <2>
-	MessageChannel directGreetings();
+ @Output(DIRECT)
+ // <2>
+ MessageChannel directGreetings();
 
-	@Output(BROADCAST)
-	MessageChannel broadcastGreetings();
+ @Output(BROADCAST)
+ MessageChannel broadcastGreetings();
 }

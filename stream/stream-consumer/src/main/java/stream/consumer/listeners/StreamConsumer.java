@@ -13,28 +13,28 @@ import stream.consumer.ConsumerChannels;
 @EnableBinding(ConsumerChannels.class)
 public class StreamConsumer {
 
-	public static void main(String args[]) {
-		SpringApplication.run(StreamConsumer.class, args);
-	}
+ public static void main(String args[]) {
+  SpringApplication.run(StreamConsumer.class, args);
+ }
 }
 
 @Component
 class GreetingProcessor {
 
-	private Log log = LogFactory.getLog(getClass());
+ private Log log = LogFactory.getLog(getClass());
 
-	@StreamListener(ConsumerChannels.DIRECTED)
-	public void onNewDirectedGreetings(String greeting) {
-		this.onNewGreeting(ConsumerChannels.DIRECTED, greeting);
-	}
+ @StreamListener(ConsumerChannels.DIRECTED)
+ public void onNewDirectedGreetings(String greeting) {
+  this.onNewGreeting(ConsumerChannels.DIRECTED, greeting);
+ }
 
-	@StreamListener(ConsumerChannels.BROADCASTS)
-	public void onNewBroadcastGreeting(String greeting) {
-		this.onNewGreeting(ConsumerChannels.BROADCASTS, greeting);
-	}
+ @StreamListener(ConsumerChannels.BROADCASTS)
+ public void onNewBroadcastGreeting(String greeting) {
+  this.onNewGreeting(ConsumerChannels.BROADCASTS, greeting);
+ }
 
-	private void onNewGreeting(String prefix, String greeting) {
-		log.info("greeting received in @StreamListener (" + prefix + "): "
-			+ greeting);
-	}
+ private void onNewGreeting(String prefix, String greeting) {
+  log.info("greeting received in @StreamListener (" + prefix + "): "
+   + greeting);
+ }
 }

@@ -16,35 +16,35 @@ import stream.consumer.ConsumerChannels;
 // <1>
 public class StreamConsumer {
 
-	public static void main(String args[]) {
-		SpringApplication.run(StreamConsumer.class, args);
-	}
+ public static void main(String args[]) {
+  SpringApplication.run(StreamConsumer.class, args);
+ }
 
-	// <2>
-	private IntegrationFlow incomingMessageFlow(SubscribableChannel incoming,
-		String prefix) {
+ // <2>
+ private IntegrationFlow incomingMessageFlow(SubscribableChannel incoming,
+  String prefix) {
 
-		Log log = LogFactory.getLog(getClass());
+  Log log = LogFactory.getLog(getClass());
 
-		return IntegrationFlows
-			.from(incoming)
-			.transform(String.class, String::toUpperCase)
-			.handle(
-				String.class,
-				(greeting, headers) -> {
-					log.info("greeting received in IntegrationFlow (" + prefix + "): "
-						+ greeting);
-					return null;
-				}).get();
-	}
+  return IntegrationFlows
+   .from(incoming)
+   .transform(String.class, String::toUpperCase)
+   .handle(
+    String.class,
+    (greeting, headers) -> {
+     log.info("greeting received in IntegrationFlow (" + prefix + "): "
+      + greeting);
+     return null;
+    }).get();
+ }
 
-	@Bean
-	IntegrationFlow direct(ConsumerChannels channels) {
-		return incomingMessageFlow(channels.directed(), "directed");
-	}
+ @Bean
+ IntegrationFlow direct(ConsumerChannels channels) {
+  return incomingMessageFlow(channels.directed(), "directed");
+ }
 
-	@Bean
-	IntegrationFlow broadcast(ConsumerChannels channels) {
-		return incomingMessageFlow(channels.broadcasts(), "broadcast");
-	}
+ @Bean
+ IntegrationFlow broadcast(ConsumerChannels channels) {
+  return incomingMessageFlow(channels.broadcasts(), "broadcast");
+ }
 }

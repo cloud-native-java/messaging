@@ -17,34 +17,34 @@ import java.util.Map;
 @Profile("production")
 class MashapeEmailValidationService implements EmailValidationService {
 
-	private final String mashapeKey;
+ private final String mashapeKey;
 
-	private final RestTemplate restTemplate;
+ private final RestTemplate restTemplate;
 
-	private final String uri;
+ private final String uri;
 
-	@Autowired
-	public MashapeEmailValidationService(@Value("${mashape.key}") String key,
-		@Value("${email-validator.uri}") String uri, RestTemplate restTemplate) {
-		this.mashapeKey = key;
-		this.uri = uri;
-		this.restTemplate = restTemplate;
-	}
+ @Autowired
+ public MashapeEmailValidationService(@Value("${mashape.key}") String key,
+  @Value("${email-validator.uri}") String uri, RestTemplate restTemplate) {
+  this.mashapeKey = key;
+  this.uri = uri;
+  this.restTemplate = restTemplate;
+ }
 
-	public boolean isEmailValid(String email) {
-		UriComponents emailValidatedUri = UriComponentsBuilder.fromHttpUrl(uri)
-			.buildAndExpand(email);
+ public boolean isEmailValid(String email) {
+  UriComponents emailValidatedUri = UriComponentsBuilder.fromHttpUrl(uri)
+   .buildAndExpand(email);
 
-		RequestEntity<Void> requestEntity = RequestEntity
-			.get(emailValidatedUri.toUri()).header("X-Mashape-Key", mashapeKey)
-			.build();
+  RequestEntity<Void> requestEntity = RequestEntity
+   .get(emailValidatedUri.toUri()).header("X-Mashape-Key", mashapeKey)
+   .build();
 
-		ParameterizedTypeReference<Map<String, Boolean>> ptr = new ParameterizedTypeReference<Map<String, Boolean>>() {
-		};
+  ParameterizedTypeReference<Map<String, Boolean>> ptr = new ParameterizedTypeReference<Map<String, Boolean>>() {
+  };
 
-		ResponseEntity<Map<String, Boolean>> responseEntity = restTemplate
-			.exchange(requestEntity, ptr);
+  ResponseEntity<Map<String, Boolean>> responseEntity = restTemplate
+   .exchange(requestEntity, ptr);
 
-		return responseEntity.getBody().get("isValid");
-	}
+  return responseEntity.getBody().get("isValid");
+ }
 }
