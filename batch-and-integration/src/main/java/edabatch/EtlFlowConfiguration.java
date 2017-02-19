@@ -26,7 +26,6 @@ class EtlFlowConfiguration {
 		@Value("${input-directory:${HOME}/Desktop/in}") File directory,
 		BatchChannels c, JobLauncher launcher, Job job) {
 
-		// @formatter:off
 		return
 			IntegrationFlows
 				.from(
@@ -52,8 +51,6 @@ class EtlFlowConfiguration {
 						.recipient(c.invalid(), this::notFinished)
 						.recipient(c.completed(), this::finished))
 				.get();
-
-		// @formatter:on
 	}
 
 	private boolean finished(Message<?> msg) {
