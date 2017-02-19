@@ -25,7 +25,6 @@ class FinishedFileFlowConfiguration {
  IntegrationFlow finishedJobsFlow(BatchChannels channels,
   @Value("${completed-directory:${HOME}/Desktop/completed}") File finished,
   JdbcTemplate jdbcTemplate) {
-  // @formatter:off
   return IntegrationFlows
     .from(channels.completed())
     .handle(JobExecution.class,
@@ -44,7 +43,6 @@ class FinishedFileFlowConfiguration {
        contacts.forEach(log::info);
        return null;
       }).get();
-  // @formatter:on
  }
 
 }

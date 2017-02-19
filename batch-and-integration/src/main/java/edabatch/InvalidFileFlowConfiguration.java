@@ -18,7 +18,6 @@ class InvalidFileFlowConfiguration {
  @Bean
  IntegrationFlow invalidFileFlow(BatchChannels channels,
   @Value("${error-directory:${HOME}/Desktop/errors}") File errors) {
-  // @formatter:off
   return IntegrationFlows
     .from(channels.invalid())
     .handle(JobExecution.class,
@@ -29,7 +28,6 @@ class InvalidFileFlowConfiguration {
        mv(file, errors);
        return null;
       }).get();
-  // @formatter:on
  }
 
 }
