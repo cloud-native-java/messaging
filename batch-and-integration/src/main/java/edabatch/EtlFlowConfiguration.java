@@ -26,31 +26,26 @@ class EtlFlowConfiguration {
 		@Value("${input-directory:${HOME}/Desktop/in}") File directory,
 		BatchChannels c, JobLauncher launcher, Job job) {
 
-		return
-			IntegrationFlows
-				.from(
-						Files.inboundAdapter(directory).autoCreateDirectory(true),
-						cs -> cs.poller(p -> p.fixedRate(1000)))
-				.handle(File.class, (file, headers) -> {
+		return IntegrationFlows
+			.from(Files.inboundAdapter(directory).autoCreateDirectory(true),
+				cs -> cs.poller(p -> p.fixedRate(1000)))
+			.handle(
+				File.class,
+				(file, headers) -> {
 
 					String absolutePath = file.getAbsolutePath();
 
-					JobParameters params = new JobParametersBuilder()
-							.addString("file", absolutePath)
-							.toJobParameters();
+					JobParameters params = new JobParametersBuilder().addString("file",
+						absolutePath).toJobParameters();
 
-					return MessageBuilder
-						.withPayload(new JobLaunchRequest(job, params))
+					return MessageBuilder.withPayload(new JobLaunchRequest(job, params))
 						.setHeader(ORIGINAL_FILE, absolutePath)
-						.copyHeadersIfAbsent(headers)
-						.build();
+						.copyHeadersIfAbsent(headers).build();
 				})
-				.handle(new JobLaunchingGateway(launcher))
-				.routeToRecipients(
-					spec -> spec
-						.recipient(c.invalid(), this::notFinished)
-						.recipient(c.completed(), this::finished))
-				.get();
+			.handle(new JobLaunchingGateway(launcher))
+			.routeToRecipients(
+				spec -> spec.recipient(c.invalid(), this::notFinished).recipient(
+					c.completed(), this::finished)).get();
 	}
 
 	private boolean finished(Message<?> msg) {
